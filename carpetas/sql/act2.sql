@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-01-2021 a las 10:02:55
+-- Tiempo de generación: 31-01-2021 a las 17:09:26
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -52,14 +52,24 @@ INSERT INTO `categoria` (`categoria_id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `post` (
-  `post_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nick` varchar(15) DEFAULT NULL,
-  `post` varchar(255) NOT NULL,
-  `fav` int(11) DEFAULT NULL,
-  `categoriaID` int(11) NOT NULL,
-  PRIMARY KEY (`post_id`),
-  KEY `categoriaID` (`categoriaID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `alias` varchar(15) DEFAULT NULL,
+  `postText` varchar(255) NOT NULL,
+  `categoria_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `categoria_id` (`categoria_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `post`
+--
+
+INSERT INTO `post` (`id`, `alias`, `postText`, `categoria_id`) VALUES
+(1, 'samus', 'Hola como estas en esta maravillos maÃ±ana?', 5),
+(2, 'samus', 'bones tardes', 1),
+(3, 'Franco', 'EspaÃ±a, ahora mismo es una mierda, con franco esto no passaba.', 2),
+(4, 'Franco', 'EspaÃ±a, ahora mismo es una mierda, con franco esto no passaba.', 5),
+(5, 'Maikol', 'Buenas tardes', 3);
 
 -- --------------------------------------------------------
 
@@ -73,7 +83,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`) VALUES
+(1, 'primer@gmail.com', '1234'),
+(2, 'afreixes@gmail.com', '1234'),
+(3, 'proba2@gmail.com', '1234'),
+(4, 'afreixesarnau@gmail.com', '1234'),
+(5, 'raulsiemprearriba.esp@gmail.com', '1234'),
+(6, 'afreixesarnau1@gmail.com', '1234'),
+(7, 'afreixesarnau23@gmail.com', '1234');
 
 --
 -- Restricciones para tablas volcadas
@@ -83,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Filtros para la tabla `post`
 --
 ALTER TABLE `post`
-  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`categoriaID`) REFERENCES `categoria` (`categoria_id`);
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`categoria_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
